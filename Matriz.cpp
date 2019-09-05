@@ -53,9 +53,9 @@ void Matriz::valoresMatriz() {
 
 void Matriz::crearespacio() {
     //creando matriz
-    M=new TipoEspacio*[ALTO];
-    for (int i=0; i<ALTO;i++){
-        M[i]=new TipoEspacio [ANCHO];
+    M=new TipoEspacio*[ANCHO];
+    for (int i=0; i<ANCHO;i++){
+        M[i]=new TipoEspacio [ALTO];
     }
 }
 
@@ -105,9 +105,8 @@ void ejecutar(){
     Matriz M_B(col,fil);   M_B.valoresMatriz();
     cout<<"Creando matriz B ..."<<endl;
 
-    auto *M_C=new Matriz(fil,col);
-    auto *M_D=new Matriz(fil,col);
-    auto *M_E=new Matriz(fil,col);
+    Matriz M_C(fil,col); M_C.crearespacio();
+    Matriz M_D(col,fil); M_D.crearespacio();
 
     do{Menu();cin>>opcion;}while(opcion<0||opcion>8);
 
@@ -121,35 +120,27 @@ void ejecutar(){
             do{Menu();cin>>opcion;}while(opcion<0||opcion>8);break;
 
         case OPCIONES::Transpuesta:
-            M_C->transpuesta(*M_C);M_C->imprimirMatriz();break;
-            break;
-
-        case OPCIONES ::Suma:
-
-            break;
+            M_C.matrizDispersa(M_A);
+            M_C.imprimirMatriz();
+            do{Menu();cin>>opcion;}while(opcion<0||opcion>8);break;
+            
+        case OPCIONES::Suma:
+            M_D.Suma(M_A,M_B);
+            M_D.imprimirMatriz();
+            do{Menu();cin>>opcion;}while(opcion<0||opcion>8);break;
     }
 
 }
 
-void Matriz::transpuesta(const Matriz &A) {
+void Matriz::matrizDispersa(Matriz A){
+    for(int i=0;i<ANCHO;i++){
+        for(int j=0;j<ALTO;j++)
+        {M[i][j]=A.M[j][i];}}
 
-    for (TipoEspacio i = 0; i <ALTO; i++) {
-        for (TipoEspacio j = 0; j < ANCHO; j++) { A.M[i][j]= M[j][i];
-    }
-}}
+}
 
-//void Matriz::suma(const Matriz &A,const Matriz &B){
-//    TipoEspacio mayorAncho,mayorAlto;
-//    if(A.getAncho()<B.getAncho()){mayorAncho=B.getAncho();} else {mayorAncho=A.getAncho();}
-//    if(A.getAlto()<B.getAlto()){mayorAlto=B.getAlto();} else {mayorAlto=B.getAlto();}
-//    Matriz sum(mayorAncho,mayorAlto); sum.crearespacio();
-//    for(TipoEspacio i=0;i<mayorAncho;i++){
-//    for(TipoEspacio j=0;j<mayorAlto;j++){//sum[i][j]=A[i][j]+B[i][j];
-//    }}}
 
-//void Matriz::multiplicacionEscalar(const Matriz &A,int n){
-//    Matriz sum(A.getAncho(),A.getAlto()); sum.crearespacio();
-//    for(TipoEspacio i=0;i<A.getAncho();i++){
-//        for(TipoEspacio j=0;j<A.getAlto();j++){//sum[i][j]=A[i][j]*B[i][j];
-//        }}
-//}
+void Matriz::Suma( Matriz A,Matriz B){
+    for(TipoEspacio i=0;i<ANCHO;i++){
+    for(TipoEspacio j=0;j<ALTO;j++){M[i][j]=A.M[i][j]+B.M[i][j];
+    }}}
