@@ -1,4 +1,4 @@
-
+//
 // Created by HP on 3/09/2019.
 //
 
@@ -35,9 +35,9 @@ public:
     void imprimirdatos();
     int getAlto();
     int getAncho();
-    void Suma(const Matriz &A,const Matriz &B);
-    void transpuesta(const Matriz &A);
-    void multiplicacionEscalar(const Matriz &A,int n);
+    void Suma(Matriz A, Matriz B);
+    void matrizDispersa(Matriz A);
+    //void multiplicacionEscalar(const Matriz &A,int n);
 
 };
 
