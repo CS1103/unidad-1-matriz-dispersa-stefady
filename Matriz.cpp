@@ -99,20 +99,22 @@ void ejecutar(){
     cout<<"Cantidad de filas: ";cin>>fil;
     cout<<"Cantidad de columnas: ";cin>>col;
 
-    Matriz M_A(col,fil);cout<<"Creando matriz A ...";   M_A.valoresMatriz();
+    Matriz M_A(col,fil);cout<<"Creando matriz 1 ..."<<endl;M_A.valoresMatriz();
     ;M_A.imprimirMatriz();cout<<endl;
 
-    Matriz M_B(col,fil);   M_B.valoresMatriz();
-    cout<<"Creando matriz B ..."<<endl;
+    Matriz M_B(col,fil);cout<<"Creando matriz 2 ..."<<endl;M_B.valoresMatriz();
+    M_B.imprimirMatriz();
 
     Matriz M_C(fil,col); M_C.crearespacio();
-    Matriz M_D(col,fil); M_D.crearespacio();
 
     do{Menu();cin>>opcion;}while(opcion<0||opcion>8);
 
     switch (OPCIONES(opcion)){
         case OPCIONES::Imprimir:
-            M_A.imprimirMatriz();
+            int imp1;
+            cout<<"Imprimir Matriz 1 o 2: ";cin>>imp1;
+            if(imp1==1){M_A.imprimirMatriz();}
+            else if(imp1==2){M_B.imprimirMatriz();}
             do{Menu();cin>>opcion;}while(opcion<0||opcion>8);break;
 
         case OPCIONES::Datos:
@@ -123,8 +125,9 @@ void ejecutar(){
             M_C.matrizDispersa(M_A);
             M_C.imprimirMatriz();
             do{Menu();cin>>opcion;}while(opcion<0||opcion>8);break;
-            
+
         case OPCIONES::Suma:
+            Matriz M_D(col,fil); M_D.crearespacio();
             M_D.Suma(M_A,M_B);
             M_D.imprimirMatriz();
             do{Menu();cin>>opcion;}while(opcion<0||opcion>8);break;
